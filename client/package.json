@@ -11,7 +11,7 @@
   "scripts": {
     "dev": "webpack-dev-server --mode=development --open --hot --progress",
     "build": "webpack --mode=production --progress",
-    "start": "webpack --mode=development --progress"
+    "start": "webpack --mode=production --progress"
   },
   "devDependencies": {
     "@types/node": "^18.8.5",
