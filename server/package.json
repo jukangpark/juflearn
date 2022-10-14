@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "build": "tsc",
-    "start": "cd dist && node ./src/app.js",
+    "start": "cd build && node app.js",
     "client": "cd .. && cd client && npm run dev",
     "server": "nodemon --exec ts-node src/app.ts",
     "dev": "concurrently --kill-others-on-fail \"npm run server\" \"npm run client\" ",
