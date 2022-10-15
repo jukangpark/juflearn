@@ -24,6 +24,10 @@ app.use(express.static("dist")); // build 안에 폴더에 접근할 수 있도�
 
 const PORT = process.env.PORT || 9000;
 
+app.get("/", function (req, res) {
+  res.sendFile(__dirname + "/dist/index.html");
+});
+
 app.get("*", (req, res) => {
   res.sendFile(__dirname + "/dist/index.html");
 });
