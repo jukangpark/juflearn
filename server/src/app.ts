@@ -1,3 +1,8 @@
+require("dotenv").config();
+// 최대한 빨리 dotenv 파일을 환경변수에 추가해준다.
+
+import "./db";
+
 // ts 컴파일러를 먼저 설치
 // npm install -g typescript
 // npm i -D typescript
