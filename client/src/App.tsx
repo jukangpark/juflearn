@@ -1,5 +1,13 @@
+import GlobalStyle from "./globalStyle";
+import Router from "./Router";
+
 const App = () => {
-  return <div>Home 페이지 입니다.</div>;
+  return (
+    <>
+      <Router />
+      <GlobalStyle />
+    </>
+  );
 };
 
 export default App;
