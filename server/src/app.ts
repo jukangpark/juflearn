@@ -27,6 +27,8 @@ const PORT = process.env.PORT || 9000;
 app.get("/", function (req, res) {
   res.sendFile(__dirname + "/dist/index.html");
 });
+// __dirname 은 Node.js 에서 파일명을 제외한 절대 경로를 의미한다.
+// 실제 build 된 app.js 는 build 폴더에 들어가게 될것이다.
 
 app.get("*", (req, res) => {
   res.sendFile(__dirname + "/dist/index.html");
@@ -37,7 +39,12 @@ app.listen(PORT, () => {
 });
 
 // tsc -> 컴파일러를 통해 트랜스파일링을 해줘야하는데,
-// node app.js
+// tsc 명령어를 통해 build 를 하게 되면,
+// tsconfig.json 의 "outDir" : "./build", 라고 주게되면
+// server 폴더에 build 폴더를 생성해주고
+// 거기에 트랜스파일링이 된 app.js 에 떨어지게 됨.
+// 그리고 빌드된 app.js 에서 /dist/index.html 을 찾아야 하기 때문에
+// 빌드된 경로로 지정해주어야 한다.
 
 // 매번 이런 일련의 과정을 반복하면 번거러우니까,
 
