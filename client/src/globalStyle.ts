@@ -28,6 +28,7 @@ const GlobalStyle = createGlobalStyle`
   }
   body {
   line-height: 1;
+  margin-top: 70px; // header  영역 높이만큼 추후에 수정
   }
   ol, ul {
   list-style: none;
