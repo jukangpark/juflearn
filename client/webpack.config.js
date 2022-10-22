@@ -25,7 +25,21 @@ module.exports = (env, argv) => {
 
   return {
     mode: prod ? "production" : "development",
-    devtool: prod ? "hidden-source-map" : "eval",
+    // 웹팩을 실행하여 여러 모듈을 하나의 번들링 파일로 만들 때
+    // 자바스크립트에서 에러가 발생하면 브라우저의 콘솔에는 번들링된
+    // 하나의 파일 첫째줄에서 에러가 떴다고 알려주기 때문에
+    // 어떤 모듈의 몇 번째 줄에서 에러가 떴는지 정확히 알기 쉽지 않다.
+    // 쉽게 에러를 트래킹 하기 위해서 웹팩에서는 source.map 이라는 모듈을 사용한다.
+
+    // eval-source-map,
+    // eval-cheap-source-map,
+    // inline-source-map
+    // 을 자주사용하며, 공식 사이트에서는 eval-change-source-map 을 권장한다.
+
+    // production 모드에서는 source map 을 설정하지 않거나, hidden-source-map 을 자주 사용한다.
+    // hidden-source-map -> source-map 과 동일하지만, 번들에 참조 주석을 추가하지 않습니다.
+    // 오류 보고서의 오류 스택 추적에만 소스맵을 매핑하고, 브라우저 개발 도구에는 소스맵을 노출하지 않는 경우에 유용하다.
+    devtool: prod ? "hidden-source-map" : "eval-cheap-module-source-map",
     entry: "./src/index.tsx",
     output: {
       path: path.join(__dirname, "/dist"),
@@ -42,6 +56,7 @@ module.exports = (env, argv) => {
       rules: [
         {
           test: /\.tsx?$/,
+          exclude: /node_modules/,
           use: ["babel-loader", "ts-loader"],
         },
       ],
@@ -52,13 +67,12 @@ module.exports = (env, argv) => {
       }),
       new HtmlWebpackPlugin({
         template: "./public/index.html",
-        minify:
-          process.env.NODE_ENV === "production"
-            ? {
-                collapseWhitespace: true, // 빈칸 제거
-                removeComments: true, // 주석 제거
-              }
-            : false,
+        minify: prod
+          ? {
+              collapseWhitespace: true, // 빈칸 제거
+              removeComments: true, // 주석 제거
+            }
+          : false,
       }),
       new CleanWebpackPlugin(),
     ],
