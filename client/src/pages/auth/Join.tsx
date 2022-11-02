@@ -1,9 +1,11 @@
+import Button from "../../components/auth/Button";
+
 const Join = () => {
   return (
     <div>
       <form>
         <input />
-        <button>회원가입</button>
+        <Button>회원가입</Button>
       </form>
     </div>
   );

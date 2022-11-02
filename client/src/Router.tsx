@@ -1,20 +1,22 @@
-import { BrowserRouter, Outlet, Route, Routes } from "react-router-dom";
-import Layout from "./layout/Layout";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import Layout from "./Layout";
+import Page404 from "./pages/404/Page404";
 import Join from "./pages/auth/Join";
 import Login from "./pages/auth/Login";
 import Home from "./pages/Home";
-import Page404 from "./pages/Page404";
+import Profile from "./pages/Profile";
 
 const Router = () => {
   return (
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Layout />}>
-          <Route path="/" element={<Home />} />
+          <Route index element={<Home />} />
           <Route path="/join" element={<Join />} />
           <Route path="/login" element={<Login />} />
+          <Route path="/profile/:username" element={<Profile />} />
+          <Route path="*" element={<Page404 />} />
         </Route>
-        <Route path="*" element={<Page404 />} />
       </Routes>
     </BrowserRouter>
   );

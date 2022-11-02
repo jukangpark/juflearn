@@ -1,8 +1,10 @@
-import React from "react"; // 사용자 인터페이스를 구축하기위한 js 라이브러리
-import ReactDOM from "react-dom"; // 리엑트를 DOM 과 연결
+// import React from "react"; // 사용자 인터페이스를 구축하기위한 js 라이브러리
+import ReactDOM from "react-dom/client"; // 리엑트를 DOM 과 연결
+import { Provider } from "react-redux";
 // This package serves as the entry point to the DOM and server renderers for React.
 // It is intended to be paired with the generic React package, which is shipped as react to npm.
 import App from "./App";
+import store from "./redux/store";
 
 // #npm
 // 리엑트에서 TS 를 사용하기 위해 필요한 패키지들
@@ -25,4 +27,17 @@ import App from "./App";
 // yarn add -D babel-loader @babel/core
 // yarn add -D @babel/preset-env @babel/preset-react @babel/preset-typescript
 
-ReactDOM.render(<App />, document.getElementById("root"));
+const root = ReactDOM.createRoot(
+  document.getElementById("root") as HTMLElement
+);
+
+root.render(
+  <Provider store={store}>
+    <App />
+  </Provider>
+);
+
+/* 
+  React 18 shipped March 29th, 2022. 
+  ReactDOM.render has been deprecated in React 18 and currently issues a warning and runs in a compatible mode.
+*/
