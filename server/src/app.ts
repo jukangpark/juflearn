@@ -23,6 +23,7 @@ import "./db";
 // c:\Users\%USERNAME%\AppData\Roaming\npm\node_modules
 import express from "express";
 import userRouter from "./router/userRouter";
+import lectureRouter from "./router/lectureRouter";
 // CommonJS 모듈을 위와같이 ES6 모듈 코드베이스로 가져오려고 하게되면,
 // require(~~~); 의 구문으로 해결할 수도 있지만,
 // tsconfig 의 컴파일 옵션 중 --esModuleInterop flab 의 수정을 통해 해결할 수 있습니다.
@@ -36,6 +37,7 @@ app.use(express.json());
 const PORT = process.env.PORT || 9000;
 
 app.use("/user", userRouter);
+app.use("/lectures", lectureRouter);
 app.get("/", function (req, res) {
   res.sendFile(__dirname + "/dist/index.html");
 });
