@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import Button from "../../components/auth/Button";
 
@@ -16,6 +17,15 @@ const Join = () => {
 
   const onSubmit = ({ id, password, confirmPassword }: User) => {
     console.log(id, password, confirmPassword);
+    fetch("/user/join", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ id, password }),
+    })
+      .then((res) => res.json())
+      .then((data) => console.log(data));
   };
 
   return (

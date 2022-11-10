@@ -49,6 +49,11 @@ module.exports = (env, argv) => {
       port: 3000,
       hot: true,
       historyApiFallback: true,
+      proxy: {
+        "/user/*": {
+          target: "http://localhost:9000",
+        },
+      },
     },
     resolve: {
       extensions: [".js", ".jsx", ".ts", ".tsx"],

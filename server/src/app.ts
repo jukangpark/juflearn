@@ -22,6 +22,7 @@ import "./db";
 // 윈도우의 경우
 // c:\Users\%USERNAME%\AppData\Roaming\npm\node_modules
 import express from "express";
+import userRouter from "./router/userRouter";
 // CommonJS 모듈을 위와같이 ES6 모듈 코드베이스로 가져오려고 하게되면,
 // require(~~~); 의 구문으로 해결할 수도 있지만,
 // tsconfig 의 컴파일 옵션 중 --esModuleInterop flab 의 수정을 통해 해결할 수 있습니다.
@@ -33,9 +34,11 @@ app.use(express.urlencoded({ extended: true }));
 
 const PORT = process.env.PORT || 9000;
 
+app.use("/user", userRouter);
 app.get("/", function (req, res) {
   res.sendFile(__dirname + "/dist/index.html");
 });
+
 // __dirname 은 Node.js 에서 파일명을 제외한 절대 경로를 의미한다.
 // 실제 build 된 app.js 는 build 폴더에 들어가게 될것이다.
 
@@ -45,10 +48,9 @@ app.get("/", function (req, res) {
 
 app.get("*", (req, res) => {
   if (isHeroku) {
-    res.sendFile(__dirname + "/dist/index.html");
-    // 여기 코드를 애초에 타지를 않네;;;
+    return res.sendFile(__dirname + "/dist/index.html");
   } else {
-    res.sendFile(process.cwd() + "/build/dist/index.html");
+    return res.sendFile(process.cwd() + "/build/dist/index.html");
   }
 });
 
