@@ -3,6 +3,8 @@ require("dotenv").config();
 
 const isHeroku = process.env.NODE_ENV === "production";
 
+console.log(process.env.NODE_ENV);
+
 import "./db";
 
 // ts 컴파일러를 먼저 설치
