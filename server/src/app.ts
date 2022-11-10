@@ -51,7 +51,7 @@ app.get("/", function (req, res) {
 
 app.get("*", (req, res) => {
   if (isHeroku) {
-    res.sendFile(__dirname + "/build/index.html");
+    res.sendFile(__dirname + "/build/dist/index.html");
   }
   res.sendFile(process.cwd() + "/build/dist/index.html");
 });
