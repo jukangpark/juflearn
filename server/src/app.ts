@@ -1,6 +1,8 @@
 require("dotenv").config();
 // 최대한 빨리 dotenv 파일을 환경변수에 추가해준다.
 
+const isHeroku = process.env.NODE_ENV === "production";
+
 import "./db";
 
 // ts 컴파일러를 먼저 설치
@@ -39,7 +41,18 @@ app.get("/", function (req, res) {
 // 사용자가 localhost:3000/join 페이지에 접근했을 때, 서버로 요청을 보내지 않고,
 // 웹팩서버에서 처리하게끔 개발해줘야함.
 
+// app.get("*", (req, res) => {
+//   if (isHeroku) {
+//     res.sendFile(__dirname + "/build/index.html");
+//   } else {
+//     res.sendFile(process.cwd() + "/dist/build/index.html");
+//   }
+// });
+
 app.get("*", (req, res) => {
+  if (isHeroku) {
+    res.sendFile(__dirname + "/build/index.html");
+  }
   res.sendFile(process.cwd() + "/build/dist/index.html");
 });
 
