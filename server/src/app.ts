@@ -1,17 +1,8 @@
-import dotenv from "dotenv";
-import path from "path";
+require("dotenv").config();
 // 최대한 빨리 dotenv 파일을 환경변수에 추가해준다.
 
 const isHeroku = process.env.NODE_ENV === "production";
 // const isHeroku = process.env.NODE_ENV === "production";
-(() => {
-  if (isHeroku) return; // 해로쿠 환경에서는 이 즉시 실행함수가 실행되지 않도록 막는다.
-  const result = dotenv.config({ path: path.join(__dirname, "..", ".env") });
-  // .env 파일의 경로를 dotenv.config 에 넘겨주고 성공여부를 저장함.
-  if (result.parsed == undefined)
-    // .env 파일 parsing 성공 여부 확인
-    throw new Error("Cannot loaded environment variables file."); // parsing 실패시 Throwing
-})();
 
 import "./db";
 
@@ -55,8 +46,9 @@ app.get("/", function (req, res) {
 app.get("*", (req, res) => {
   if (isHeroku) {
     res.sendFile(__dirname + "/dist/index.html");
+  } else {
+    res.sendFile(process.cwd() + "/build/dist/index.html");
   }
-  res.sendFile(process.cwd() + "/build/dist/index.html");
 });
 
 app.listen(PORT, () => {
