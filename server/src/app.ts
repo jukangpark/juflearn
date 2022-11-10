@@ -32,7 +32,7 @@ app.use(express.static("dist")); // build 안에 폴더에 접근할 수 있도�
 const PORT = process.env.PORT || 9000;
 
 app.get("/", function (req, res) {
-  res.sendFile(__dirname + "/build/dist/index.html");
+  res.sendFile(__dirname + "/dist/index.html");
 });
 // __dirname 은 Node.js 에서 파일명을 제외한 절대 경로를 의미한다.
 // 실제 build 된 app.js 는 build 폴더에 들어가게 될것이다.
@@ -51,7 +51,7 @@ app.get("/", function (req, res) {
 
 app.get("*", (req, res) => {
   if (isHeroku) {
-    res.sendFile(__dirname + "/build/dist/index.html");
+    res.sendFile(__dirname + "/dist/index.html");
   }
   res.sendFile(process.cwd() + "/build/dist/index.html");
 });
