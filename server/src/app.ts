@@ -31,6 +31,7 @@ import userRouter from "./router/userRouter";
 const app = express();
 app.use(express.static("dist")); // build 안에 폴더에 접근할 수 있도록
 app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
 
 const PORT = process.env.PORT || 9000;
 
