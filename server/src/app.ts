@@ -30,13 +30,17 @@ app.use(express.static("dist")); // build 안에 폴더에 접근할 수 있도�
 const PORT = process.env.PORT || 9000;
 
 app.get("/", function (req, res) {
-  res.sendFile(__dirname + "/dist/index.html");
+  res.sendFile(__dirname + "/build/dist/index.html");
 });
 // __dirname 은 Node.js 에서 파일명을 제외한 절대 경로를 의미한다.
 // 실제 build 된 app.js 는 build 폴더에 들어가게 될것이다.
 
+// webpack devServer 에 historyApiFallback 설정을 true 로 줘야지만,
+// 사용자가 localhost:3000/join 페이지에 접근했을 때, 서버로 요청을 보내지 않고,
+// 웹팩서버에서 처리하게끔 개발해줘야함.
+
 app.get("*", (req, res) => {
-  res.sendFile(__dirname + "/dist/index.html");
+  res.sendFile(process.cwd() + "/build/dist/index.html");
 });
 
 app.listen(PORT, () => {
