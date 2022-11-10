@@ -41,14 +41,6 @@ app.get("/", function (req, res) {
 // 사용자가 localhost:3000/join 페이지에 접근했을 때, 서버로 요청을 보내지 않고,
 // 웹팩서버에서 처리하게끔 개발해줘야함.
 
-// app.get("*", (req, res) => {
-//   if (isHeroku) {
-//     res.sendFile(__dirname + "/build/index.html");
-//   } else {
-//     res.sendFile(process.cwd() + "/dist/build/index.html");
-//   }
-// });
-
 app.get("*", (req, res) => {
   if (isHeroku) {
     res.sendFile(__dirname + "/dist/index.html");
