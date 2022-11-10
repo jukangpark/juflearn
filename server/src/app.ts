@@ -27,7 +27,7 @@ import express from "express";
 // esModuleInterop 속성이 위의 코드 처럼 true로 설정될 경우, ES6 모듈 사양을 준수하여 CommonJS 모듈을 가져올 수 있게 됩니다.
 
 const app = express();
-app.use(express.static("build")); // build 안에 폴더에 접근할 수 있도록
+app.use(express.static("dist")); // build 안에 폴더에 접근할 수 있도록
 
 const PORT = process.env.PORT || 9000;
 
