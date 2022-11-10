@@ -44,12 +44,12 @@ app.get("/", function (req, res) {
 // 웹팩서버에서 처리하게끔 개발해줘야함.
 
 app.get("*", (req, res) => {
-  // if (isHeroku) {
-  //   res.sendFile(__dirname + "/dist/index.html");
-  //   // 여기 코드를 애초에 타지를 않네;;;
-  // } else {
-  res.sendFile(process.cwd() + "/build/dist/index.html");
-  // }
+  if (isHeroku) {
+    res.sendFile(__dirname + "/dist/index.html");
+    // 여기 코드를 애초에 타지를 않네;;;
+  } else {
+    res.sendFile(process.cwd() + "/build/dist/index.html");
+  }
 });
 
 app.listen(PORT, () => {
