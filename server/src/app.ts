@@ -24,6 +24,7 @@ import "./db";
 import express from "express";
 import userRouter from "./router/userRouter";
 import lectureRouter from "./router/lectureRouter";
+// import errorHandler from "./middleware/errHandler";
 // CommonJS 모듈을 위와같이 ES6 모듈 코드베이스로 가져오려고 하게되면,
 // require(~~~); 의 구문으로 해결할 수도 있지만,
 // tsconfig 의 컴파일 옵션 중 --esModuleInterop flab 의 수정을 통해 해결할 수 있습니다.
@@ -33,6 +34,7 @@ const app = express();
 app.use(express.static("dist")); // build 안에 폴더에 접근할 수 있도록
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+// app.use(errorHandler);
 
 const PORT = process.env.PORT || 9000;
 
@@ -49,7 +51,7 @@ app.get("/", function (req, res) {
 // 사용자가 localhost:3000/join 페이지에 접근했을 때, 서버로 요청을 보내지 않고,
 // 웹팩서버에서 처리하게끔 개발해줘야함.
 
-app.get("*", (req, res) => {
+app.get("*", (req, res, next) => {
   if (isHeroku) {
     return res.sendFile(__dirname + "/dist/index.html");
   } else {
