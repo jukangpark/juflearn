@@ -23,6 +23,7 @@ const Join = () => {
     if (password !== confirmPassword) {
       return alert("비밀번호 확인이 일치하지 않습니다.");
     }
+    // try .. catch 문은 동기적으로 동작한다.
 
     fetch("/user/join", {
       method: "POST",
@@ -33,7 +34,7 @@ const Join = () => {
     })
       .then((res) => res.json())
       .then((data) => console.log("data:", data))
-      .catch((err) => console.log("error:", err));
+      .catch((err) => console.log("에러 객체?", err));
   };
 
   return (

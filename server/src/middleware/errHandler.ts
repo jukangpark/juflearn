@@ -1,9 +1,14 @@
 import { Request, Response } from "express";
 
-function errorHandler(err: Error, req: Request, res: Response) {
+interface ResponseError extends Error {
+  status?: number;
+  // message?: string;
+}
+
+function errorHandler(err: ResponseError, req: Request, res: Response) {
   return res
-    .status(500)
-    .json({ statusCode: res.statusCode, message: err.message });
+    .status(err.status || 500)
+    .json({ statusCode: err.status, message: err.message });
 }
 
 export default errorHandler;
