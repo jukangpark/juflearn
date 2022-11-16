@@ -12,3 +12,6 @@ const handleError = (error: Error) => console.log("DB Error", error);
 
 db.on("error", handleError);
 db.once("open", handleOpen);
+
+// mongodb driver 설치 후 연결하기
+// native mongodb 쿼리 작성해보기

@@ -18,3 +18,4 @@ export const join = async (req: Request, res: Response) => {
 
   return res.send({ id: "asd" });
 };
+``;
