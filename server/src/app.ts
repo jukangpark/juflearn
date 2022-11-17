@@ -21,7 +21,7 @@ import "./db";
 // /usr/local/lib/node_modules
 // 윈도우의 경우
 // c:\Users\%USERNAME%\AppData\Roaming\npm\node_modules
-import express from "express";
+import express, { NextFunction, Request, Response } from "express";
 import userRouter from "./router/userRouter";
 import lectureRouter from "./router/lectureRouter";
 // import errorHandler from "./middleware/errHandler";
@@ -30,11 +30,27 @@ import lectureRouter from "./router/lectureRouter";
 // tsconfig 의 컴파일 옵션 중 --esModuleInterop flab 의 수정을 통해 해결할 수 있습니다.
 // esModuleInterop 속성이 위의 코드 처럼 true로 설정될 경우, ES6 모듈 사양을 준수하여 CommonJS 모듈을 가져올 수 있게 됩니다.
 
+process.on("uncaughtException", (err) => {
+  console.log("죽지마");
+  console.log(err);
+
+  // return 이 없기 때문에 process 를 종료시켜 줘야합니다.
+  process.exit(1);
+});
+
 const app = express();
 app.use(express.static("dist")); // build 안에 폴더에 접근할 수 있도록
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
-// app.use(errorHandler);
+
+app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
+  // 여기는 에러 핸들러, 모든 에러가 여기를 지나게 됨.
+  // try, catch 에러를 잡을 것임 500 error 를 던짐.
+  res.status(500).json({
+    message: "Server Error",
+    error: err,
+  });
+});
 
 const PORT = process.env.PORT || 9000;
 
