@@ -12,7 +12,6 @@ export const join = async (req: Request, res: Response) => {
   const client = new MongoClient(`${process.env.DB_URL}`);
   const users = await client.db("juflearn").collection("users");
   const cursor = await client.db("juflearn").collection("users").find({});
-  const value = await cursor.toArray();
 
   const isExist = await users.find().toArray();
 
