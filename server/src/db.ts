@@ -21,7 +21,7 @@ const { MongoClient } = require("mongodb");
 
 const uri = `mongodb+srv://skyxxx9339:${process.env.PASSWORD}@juflearn.xzhyycz.mongodb.net/?retryWrites=true&w=majority`;
 // Create a new MongoClient
-const client = new MongoClient(uri);
+export const client = new MongoClient(uri);
 async function run() {
   try {
     // Connect the client to the server (optional starting in v4.7)
