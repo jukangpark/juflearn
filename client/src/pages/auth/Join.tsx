@@ -33,15 +33,21 @@ const Join = () => {
       body: JSON.stringify({ email, password }),
     })
       .then((res) => {
+        const errorMessage = res.json();
+
+        // console.log(errorMessage.[[PromiseResult]]);
         if (!res.ok) {
           console.log(res);
-
-          throw new Error(`${res.status} 에러가 발생했습니다.`);
+          // const message = res.json();
+          throw new Error(
+            `${res.status} 에러가 발생하였습니다. ${res.body} ${errorMessage}`
+          );
+          // res.body 가 ReadableStream 인데, 어떤식으로 파싱해야 해결할 수 있을까?
         }
         return res.json();
       })
       .then((data) => console.log("데이터", data))
-      .catch((error) => console.log("에러 메시지", error));
+      .catch((error) => console.log(error));
   };
 
   return (
