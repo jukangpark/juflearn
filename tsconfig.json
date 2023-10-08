@@ -19,7 +19,11 @@
       }
     ],
     "paths": {
-      "@/*": ["./src/*"]
+      "@/*": ["./src/*"],
+      "@db/*": ["./src/app/server/db/*"],
+      "@services/*": ["./src/app/server/services/*"],
+      "@middleware/*": ["./src/app/server/middleware/*"],
+      "@axios/*": ["./src/app/axios/*"]
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],

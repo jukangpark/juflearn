@@ -9,12 +9,17 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@apollo/client": "^3.8.5",
+    "@apollo/server": "^4.9.4",
+    "graphql": "^16.8.1",
+    "mongodb": "^6.1.0",
     "next": "13.5.4",
     "react": "^18",
     "react-dom": "^18",
     "recoil": "^0.7.7"
   },
   "devDependencies": {
+    "@types/graphql": "^14.5.0",
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
