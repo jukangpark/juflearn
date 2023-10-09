@@ -1,35 +1,15 @@
 "use client";
 
-import { gql } from "@apollo/client";
 import { useQuery } from "@apollo/client";
-
-const GET_COUNTRIES = gql`
-  query Countries {
-    countries {
-      code
-      name
-      emoji
-    }
-  }
-`;
-
-interface Country {
-  code: string;
-  emoji: string;
-  name: string;
-}
-
-interface CountryData {
-  countries: Country[];
-}
+import { getCourse } from "@/graphql/queries/getCourse";
 
 const Home = () => {
-  const { loading, error, data } = useQuery(GET_COUNTRIES);
-  const countries = data?.countries.slice(0, 4);
+  const courseId = "65237bccae11a112903841a7";
+  const { loading, error, data } = useQuery(getCourse, {
+    variables: { id: courseId },
+  });
 
-  if (loading) {
-    return <h2>로딩중</h2>;
-  }
+  console.log("data", data);
 
   if (error) {
     return <h1>에러 발생</h1>;
@@ -37,12 +17,14 @@ const Home = () => {
 
   return (
     <div>
-      HomePage
-      {countries?.map((country: Country, idx: number) => (
-        <div key={`country-${idx}`}>
-          {country.code} / {country.emoji} / {country.name}
+      {loading ? (
+        <h3>강의 불러오는 중</h3>
+      ) : (
+        <div>
+          <h1>{data?.course?.id}</h1>
+          <h1>{data?.course?.name}</h1>
         </div>
-      ))}
+      )}
     </div>
   );
 };

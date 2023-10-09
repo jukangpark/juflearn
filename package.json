@@ -11,7 +11,11 @@
   "dependencies": {
     "@apollo/client": "^3.8.5",
     "@apollo/server": "^4.9.4",
+    "@as-integrations/next": "^2.0.2",
+    "apollo-datasource-mongodb": "^0.6.0",
+    "apollo-server-core": "^3.12.1",
     "graphql": "^16.8.1",
+    "graphql-tag": "^2.12.6",
     "mongodb": "^6.1.0",
     "next": "13.5.4",
     "react": "^18",
