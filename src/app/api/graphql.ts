@@ -7,7 +7,17 @@ import Course from "../server/data/Course";
 const MONGO_URI = process.env.MONGO_URI as string;
 
 const client = new MongoClient(MONGO_URI);
-client.connect();
+
+async function start() {
+  try {
+    await client.connect();
+    console.log("Connected to MongoDB server");
+  } catch (err) {
+    console.error(err);
+  }
+}
+
+start();
 
 const resolvers = {
   Query: {
