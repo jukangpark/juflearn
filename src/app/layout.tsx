@@ -2,6 +2,7 @@ import "./globals.css";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import Header from "../components/Header";
+import RecoilApolloWrapper from "@/RecoilApolloWrapper";
 
 /** 
   Inter 는 구글 폰트에서 제공하는 폰트 중 하나입니다.
@@ -27,8 +28,10 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className} suppressHydrationWarning={true}>
-        <Header />
-        {children}
+        <RecoilApolloWrapper>
+          <Header />
+          {children}
+        </RecoilApolloWrapper>
       </body>
     </html>
   );
