@@ -1,13 +1,13 @@
 import { MongoDataSource } from "apollo-datasource-mongodb";
 
-interface Course {
+interface CourseInterface {
   _id: string;
   name: string;
   description: string;
 }
 
-export default class Courses extends MongoDataSource<Course> {
-  async getCourses(courseId: string): Promise<Course | null> {
+export default class Course extends MongoDataSource<CourseInterface> {
+  async getCourse(courseId: string): Promise<CourseInterface | null> {
     const course = await this.findOneById(courseId);
     return course ?? null;
   }
