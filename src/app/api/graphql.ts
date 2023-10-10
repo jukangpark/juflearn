@@ -2,17 +2,22 @@ import { ApolloServer } from "@apollo/server";
 import { startServerAndCreateNextHandler } from "@as-integrations/next";
 import { gql } from "graphql-tag";
 import { MongoClient } from "mongodb";
-import Courses from "../server/data/Courses";
+import Course from "../server/data/Course";
 
 const MONGO_URI = process.env.MONGO_URI as string;
 
 const client = new MongoClient(MONGO_URI);
-client.connect();
 
-interface Course {
-  id: string;
-  name: string;
+async function start() {
+  try {
+    await client.connect();
+    console.log("Connected to MongoDB server");
+  } catch (err) {
+    console.error(err);
+  }
 }
+
+start();
 
 const resolvers = {
   Query: {
@@ -22,7 +27,7 @@ const resolvers = {
       { id }: { id: string },
       { dataSources }: any
     ): Promise<Course | null> => {
-      return dataSources.courses.getCourses(id);
+      return dataSources.courses.getCourse(id);
     },
   },
 };
@@ -46,7 +51,7 @@ const apolloServer = new ApolloServer({
 const nextHandler = startServerAndCreateNextHandler(apolloServer, {
   context: async () => ({
     dataSources: {
-      courses: new Courses({
+      courses: new Course({
         modelOrCollection: client.db("test").collection("courses"),
       }),
     },

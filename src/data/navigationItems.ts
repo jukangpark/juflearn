@@ -1,4 +1,4 @@
-const navigationData = [
+const navigationItems = [
   {
     id: 1,
     url: "/courses",
@@ -26,4 +26,4 @@ const navigationData = [
   },
 ];
 
-export default navigationData;
+export default navigationItems;

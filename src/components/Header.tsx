@@ -1,12 +1,12 @@
 "use client";
 
 import Navigation from "./Navigation";
-import navigationData from "../data/navigation";
+import navigationItems from "../data/navigationItems";
 
 const Header = () => {
   return (
     <header>
-      <Navigation items={navigationData} />
+      <Navigation navigationItems={navigationItems} />
     </header>
   );
 };

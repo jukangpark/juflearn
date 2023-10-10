@@ -17,36 +17,32 @@ interface NavigationItem {
 }
 
 interface NavigationProps {
-  items: NavigationItem[];
+  navigationItems: NavigationItem[];
 }
 
-const Navigation = ({ items }: NavigationProps) => {
-  const [isDark, setIsDark] = useRecoilState(isDarkAtom);
+const Navigation = ({ navigationItems }: NavigationProps) => {
+  // const [isDark, setIsDark] = useRecoilState(isDarkAtom);
   // mx-auto 는 margin-left 와 margin-right 를 auto 로 설정합니다.
   // 가운데 배치 시키기 위해 사용합니다.
   // max-w-screen-xl 은 최대 너비를 1280px 로 설정합니다.
   return (
-    <nav
-      className={`max-w-screen-xl mx-auto ${
-        isDark ? "black text-white" : "bg-white text-black"
-      }`}
-    >
+    <nav className="max-w-screen-xl mx-auto">
       <ul className="flex items-center justify-between px-4 py-3 sm:px-6 md:px-8 lg:px-10 xl:px-12">
         <li>
           <Logo />
         </li>
         <li>
           <ul className="flex items-center sm:ml-6 md:ml-8 lg:ml-10 xl:ml-12">
-            {items.map((item) => (
+            {navigationItems.map((item) => (
               <li key={item.id} className="ml-4">
                 <Link href={item.url}>{item.text}</Link>
               </li>
             ))}
             <li className="ml-4">
               <button
-                onClick={() => {
-                  setIsDark(!isDark);
-                }}
+              // onClick={() => {
+              //   setIsDark(!isDark);
+              // }}
               >
                 Toggle Theme
               </button>
