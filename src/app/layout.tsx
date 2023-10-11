@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import Header from "../components/Header";
 import RecoilApolloWrapper from "@/RecoilApolloWrapper";
+import Providers from "@/Providers";
 
 /** 
   Inter 는 구글 폰트에서 제공하는 폰트 중 하나입니다.
@@ -26,12 +27,15 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
+    // Note! If you do not add suppressHydrationWarning to your <html> you will get warnings because next-themes updates that element. This property only applies one level deep, so it won't block hydration warnings on other elements.
+    <html lang="en" suppressHydrationWarning>
       <body className={inter.className} suppressHydrationWarning={true}>
-        <RecoilApolloWrapper>
-          <Header />
-          {children}
-        </RecoilApolloWrapper>
+        <Providers>
+          <RecoilApolloWrapper>
+            <Header />
+            {children}
+          </RecoilApolloWrapper>
+        </Providers>
       </body>
     </html>
   );
