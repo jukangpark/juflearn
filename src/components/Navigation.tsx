@@ -3,8 +3,7 @@
 // useState 는 only works in a client component 에서만 사용할 수 있기 때문에 use client 를 사용합니다.
 import Link from "next/link";
 import Logo from "./Logo";
-import { useRecoilState } from "recoil";
-import { isDarkAtom } from "@/atom/isDarkAtom";
+import ToggleThemeButton from "./ToggleThemeButton";
 
 // interface 는 타입스크립트에서 타입을 정의하는 방법 중 하나입니다.
 // interface 를 사용하면 객체의 타입을 정의할 수 있습니다.
@@ -21,10 +20,10 @@ interface NavigationProps {
 }
 
 const Navigation = ({ navigationItems }: NavigationProps) => {
-  // const [isDark, setIsDark] = useRecoilState(isDarkAtom);
   // mx-auto 는 margin-left 와 margin-right 를 auto 로 설정합니다.
   // 가운데 배치 시키기 위해 사용합니다.
   // max-w-screen-xl 은 최대 너비를 1280px 로 설정합니다.
+
   return (
     <nav className="max-w-screen-xl mx-auto">
       <ul className="flex items-center justify-between px-4 py-3 sm:px-6 md:px-8 lg:px-10 xl:px-12">
@@ -39,13 +38,7 @@ const Navigation = ({ navigationItems }: NavigationProps) => {
               </li>
             ))}
             <li className="ml-4">
-              <button
-              // onClick={() => {
-              //   setIsDark(!isDark);
-              // }}
-              >
-                Toggle Theme
-              </button>
+              <ToggleThemeButton />
             </li>
           </ul>
         </li>
