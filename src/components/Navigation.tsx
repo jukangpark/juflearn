@@ -1,13 +1,11 @@
 "use client";
 
-// useState 는 only works in a client component 에서만 사용할 수 있기 때문에 use client 를 사용합니다.
 import Link from "next/link";
 import Logo from "./Logo";
 import ToggleThemeButton from "./ToggleThemeButton";
-
-// interface 는 타입스크립트에서 타입을 정의하는 방법 중 하나입니다.
-// interface 를 사용하면 객체의 타입을 정의할 수 있습니다.
-// 아래 코드에서는 NavigationProps 라는 이름의 인터페이스를 정의했습니다.
+import { useState } from "react";
+import { FaBars } from "react-icons/fa";
+import MobileMenu from "./MobileMenu";
 
 interface NavigationItem {
   id: number;
@@ -15,34 +13,49 @@ interface NavigationItem {
   text: string;
 }
 
-interface NavigationProps {
+export interface NavigationProps {
   navigationItems: NavigationItem[];
 }
 
 const Navigation = ({ navigationItems }: NavigationProps) => {
-  // mx-auto 는 margin-left 와 margin-right 를 auto 로 설정합니다.
-  // 가운데 배치 시키기 위해 사용합니다.
-  // max-w-screen-xl 은 최대 너비를 1280px 로 설정합니다.
+  const [showMenu, setShowMenu] = useState(false);
+
+  const toggleMenu = () => {
+    setShowMenu(!showMenu);
+  };
 
   return (
-    <nav className="max-w-screen-xl mx-auto">
-      <ul className="flex items-center justify-between px-4 py-3 sm:px-6 md:px-8 lg:px-10 xl:px-12">
-        <li>
-          <Logo />
-        </li>
-        <li>
-          <ul className="flex items-center sm:ml-6 md:ml-8 lg:ml-10 xl:ml-12">
-            {navigationItems.map((item) => (
-              <li key={item.id} className="ml-4">
-                <Link href={item.url}>{item.text}</Link>
-              </li>
-            ))}
-            <li className="ml-4">
-              <ToggleThemeButton />
-            </li>
-          </ul>
-        </li>
-      </ul>
+    <nav>
+      <div className="max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex justify-between">
+          <div className="flex">
+            <div className="-mr-2 flex items-center sm:hidden">
+              <button
+                className="inline-flex items-center justify-center p-2 rounded-md"
+                onClick={toggleMenu}
+              >
+                <FaBars className="h-6 w-6" />
+              </button>
+            </div>
+            <div className="flex items-center ml-3">
+              <Logo />
+            </div>
+            <div className="hidden sm:ml-6 sm:flex sm:space-x-8">
+              {navigationItems.map((item) => (
+                <Link key={item.id} href={item.url}>
+                  <div className="px-3 py-2 rounded-md text-sm">
+                    {item.text}
+                  </div>
+                </Link>
+              ))}
+            </div>
+          </div>
+          <div>
+            <ToggleThemeButton />
+          </div>
+        </div>
+      </div>
+      {showMenu && <MobileMenu />}
     </nav>
   );
 };
