@@ -11,6 +11,7 @@
 
 import { useEffect, useState } from "react";
 import { useTheme } from "next-themes";
+import { FiSun, FiMoon } from "react-icons/fi";
 
 const ToggleThemeButton = () => {
   const { theme, setTheme } = useTheme();
@@ -28,7 +29,7 @@ const ToggleThemeButton = () => {
 
   return (
     <button onClick={handleToggleTheme} data-theme={theme}>
-      {isDark ? "light" : "dark"}
+      {isDark ? <FiSun /> : <FiMoon />}
     </button>
   );
 };
