@@ -17,6 +17,18 @@ const Home = () => {
 
   return (
     <div>
+      <div className="relative h-[500px] bg-banner-background-color">
+        <div className="absolute top-0 left-0 w-full h-full flex items-center justify-center">
+          <div>
+            <h1 className="text-4xl font-bold text-white">
+              <span className="bg-gradient-to-r from-purple-400 to-pink-500 bg-clip-text text-transparent ">
+                Code King Academy
+              </span>
+            </h1>
+            <h3>Code Like a KING</h3>
+          </div>
+        </div>
+      </div>
       {loading ? (
         <h3>강의 불러오는 중</h3>
       ) : (
