@@ -2,7 +2,6 @@ import "./globals.css";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import Header from "../components/Header";
-import RecoilApolloWrapper from "@/RecoilApolloWrapper";
 import Providers from "@/Providers";
 
 /** 
@@ -17,7 +16,7 @@ import Providers from "@/Providers";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Juflearn",
+  title: "Code King Academy",
   description: "Code Like a KING",
 };
 
@@ -31,10 +30,8 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <body className={inter.className} suppressHydrationWarning={true}>
         <Providers>
-          <RecoilApolloWrapper>
-            <Header />
-            {children}
-          </RecoilApolloWrapper>
+          <Header />
+          {children}
         </Providers>
       </body>
     </html>
