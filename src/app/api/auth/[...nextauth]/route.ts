@@ -2,7 +2,7 @@ import NextAuth from "next-auth/next";
 import KaKaoProvider from "next-auth/providers/kakao";
 // import GitHubProvider from "next-auth/providers/github";
 
-export const authOptions = {
+const authOptions = {
   // Configure one or more authentication providers
   providers: [
     KaKaoProvider({

@@ -16,6 +16,7 @@
     "@as-integrations/next": "^2.0.2",
     "apollo-datasource-mongodb": "^0.6.0",
     "apollo-server-core": "^3.12.1",
+    "encoding": "^0.1.13",
     "graphql": "^16.8.1",
     "graphql-tag": "^2.12.6",
     "mongodb": "^6.1.0",
