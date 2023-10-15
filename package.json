@@ -20,9 +20,11 @@
     "graphql-tag": "^2.12.6",
     "mongodb": "^6.1.0",
     "next": "13.5.4",
+    "next-auth": "^4.23.2",
     "next-themes": "^0.2.1",
     "react": "^18",
     "react-dom": "^18",
+    "react-hook-form": "^7.47.0",
     "react-icons": "^4.11.0",
     "recoil": "^0.7.7"
   },
