@@ -11,6 +11,7 @@ const config: Config = {
     colors: {
       "kakao-background-color": "#FEE500",
       "kakao-text-color": "#000000",
+      "banner-background-color": "#590ED0",
     },
     extend: {
       backgroundImage: {
