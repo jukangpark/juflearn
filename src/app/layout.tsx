@@ -6,6 +6,7 @@ import Providers from "@/Providers";
 import Head from "next/head";
 import Script from "next/script";
 import * as gtag from "@libs/gtag";
+import { Analytics } from "@vercel/analytics/react";
 
 /** 
   Inter 는 구글 폰트에서 제공하는 폰트 중 하나입니다.
@@ -55,6 +56,7 @@ export default function RootLayout({
         <Providers>
           <Header />
           {children}
+          <Analytics />
         </Providers>
       </body>
     </html>
