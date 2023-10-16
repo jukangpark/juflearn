@@ -24,7 +24,8 @@
       "@services/*": ["./src/app/server/services/*"],
       "@middleware/*": ["./src/app/server/middleware/*"],
       "@axios/*": ["./src/app/axios/*"],
-      "@graphql/*": ["./src/graphql/*"]
+      "@graphql/*": ["./src/graphql/*"],
+      "@libs/*": ["./src/libs/*"]
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
