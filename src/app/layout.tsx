@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import Header from "../components/Header";
 import Providers from "@/Providers";
+import Head from "next/head";
 
 /** 
   Inter 는 구글 폰트에서 제공하는 폰트 중 하나입니다.
@@ -28,6 +29,24 @@ export default function RootLayout({
   return (
     // Note! If you do not add suppressHydrationWarning to your <html> you will get warnings because next-themes updates that element. This property only applies one level deep, so it won't block hydration warnings on other elements.
     <html lang="en" suppressHydrationWarning>
+      <Head>
+        <script
+          async
+          src={`https://www.googletagmanager.com/gtag/js?id=${process.env.GA_TRACKING_ID}`}
+        />
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+                window.dataLayer = window.dataLayer || [];
+                function gtag(){dataLayer.push(arguments);}
+                gtag('js', new Date());
+                gtag('config', '${process.env.GA_TRACKING_ID}', {
+                  page_path: window.location.pathname,
+                });
+              `,
+          }}
+        />
+      </Head>
       <body className={inter.className} suppressHydrationWarning={true}>
         <Providers>
           <Header />
