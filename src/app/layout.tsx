@@ -4,6 +4,8 @@ import { Inter } from "next/font/google";
 import Header from "../components/Header";
 import Providers from "@/Providers";
 import Head from "next/head";
+import Script from "next/script";
+import * as gtag from "@libs/gtag";
 
 /** 
   Inter 는 구글 폰트에서 제공하는 폰트 중 하나입니다.
@@ -31,22 +33,24 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <Head>
         <script
-          async
-          src={`https://www.googletagmanager.com/gtag/js?id=${process.env.GA_TRACKING_ID}`}
-        />
-        <script
           dangerouslySetInnerHTML={{
             __html: `
-                window.dataLayer = window.dataLayer || [];
-                function gtag(){dataLayer.push(arguments);}
-                gtag('js', new Date());
-                gtag('config', '${process.env.GA_TRACKING_ID}', {
-                  page_path: window.location.pathname,
-                });
-              `,
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments);}
+              gtag('js', new Date());
+
+              gtag('config', '${gtag.GA_TRACKING_ID}', {
+                page_path: window.location.pathname,
+              });
+            `,
           }}
         />
       </Head>
+      {/* Global Site Tag (gtag.js) - Google Analytics */}
+      <Script
+        strategy="afterInteractive"
+        src={`https://www.googletagmanager.com/gtag/js?id=${gtag.GA_TRACKING_ID}`}
+      />
       <body className={inter.className} suppressHydrationWarning={true}>
         <Providers>
           <Header />
