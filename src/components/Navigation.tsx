@@ -6,7 +6,8 @@ import ToggleThemeButton from "./ToggleThemeButton";
 import { useState } from "react";
 import { FaBars } from "react-icons/fa";
 import MobileMenu from "./MobileMenu";
-import { signOut, useSession } from "next-auth/react";
+import { useSession } from "next-auth/react";
+import Profile from "./Profile";
 
 interface NavigationItem {
   id: number;
@@ -45,7 +46,7 @@ const Navigation = ({ navigationItems }: NavigationProps) => {
               <Logo />
             </div>
             <div className="hidden sm:ml-6 sm:flex sm:space-x-8">
-              {navigationItems.map((item) => (
+              {navigationItems.map(item => (
                 <Link key={item.id} href={item.url}>
                   <div className="rounded-md text-sm leading-10">
                     {item.text}
@@ -55,25 +56,16 @@ const Navigation = ({ navigationItems }: NavigationProps) => {
             </div>
           </div>
           <div>
-            {!isLoading && session ? (
-              <button
-                className="rounded-md text-sm leading-10"
-                onClick={() => {
-                  signOut();
-                }}
-              >
-                로그아웃
-              </button>
-            ) : (
-              !isLoading && (
-                <Link href="/login" className="rounded-md text-sm">
-                  로그인
-                </Link>
-              )
-            )}
+            <ToggleThemeButton />
           </div>
           <div>
-            <ToggleThemeButton />
+            {!isLoading && session ? (
+              <Profile user={session.user} />
+            ) : (
+              <Link href="/login" className="rounded-md text-sm">
+                로그인
+              </Link>
+            )}
           </div>
         </div>
       </div>

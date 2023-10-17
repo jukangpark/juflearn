@@ -14,7 +14,7 @@ interface eventParams {
 }
 
 // https://developers.google.com/analytics/devguides/collection/gtagjs/pages
-export const pageview = (url: string) => {
+export const pageView = (url: string) => {
   window.gtag("config", GA_TRACKING_ID, {
     page_path: url,
   });
