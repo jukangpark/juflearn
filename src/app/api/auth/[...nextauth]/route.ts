@@ -1,6 +1,6 @@
 import NextAuth from "next-auth/next";
 import KaKaoProvider from "next-auth/providers/kakao";
-// import GitHubProvider from "next-auth/providers/github";
+import { User } from "next-auth";
 
 const authOptions = {
   // Configure one or more authentication providers
@@ -15,9 +15,31 @@ const authOptions = {
     // }),
     // ...add more providers here
   ],
+  callbacks: {
+    // async jwt(isNewUser: boolean, user: User, token: Record<string, any>) {
+    //   // `isNewUser`는 사용자가 처음으로 가입했을 때만 true입니다.
+    //   if (isNewUser) {
+    //     // token.isNewUser = true;
+    //     console.log("isNewUser", user);
+    //     console.log("token", token);
+    //   }
+    //   return token;
+    // },
+    async signIn({ user }: { user: User }): Promise<string | boolean> {
+      const { name, email, image } = user;
+
+      const userData = {
+        name, // 필수
+        email, //선택
+        image, // 선택
+      };
+
+      return true;
+    },
+  },
 };
 
-const handler = NextAuth(authOptions);
+const handler = NextAuth(authOptions as any);
 
 export { handler as GET, handler as POST };
 

@@ -3,6 +3,7 @@ import { startServerAndCreateNextHandler } from "@as-integrations/next";
 import { gql } from "graphql-tag";
 import { MongoClient } from "mongodb";
 import Course from "../server/data/Course";
+// import User from "../server/data/User";
 
 const MONGO_URI = process.env.MONGO_URI as string;
 
@@ -29,6 +30,13 @@ const resolvers = {
     ): Promise<Course | null> => {
       return dataSources.courses.getCourse(id);
     },
+    // user: async (
+    //   _source: any,
+    //   { id }: { id: string },
+    //   { dataSources }: any
+    // ): Promise<User | null> => {
+    //   return dataSources.users.getUser(id);
+    // },
   },
 };
 
@@ -41,6 +49,11 @@ const typeDefs = gql`
     id: ID!
     name: String!
   }
+  # type User {
+  #   name: String
+  #   email: String!
+  #   image: String!
+  # }
 `;
 
 const apolloServer = new ApolloServer({
@@ -54,6 +67,9 @@ const nextHandler = startServerAndCreateNextHandler(apolloServer, {
       courses: new Course({
         modelOrCollection: client.db("test").collection("courses"),
       }),
+      // users: new User({
+      //   modelOrCollection: client.db("test").collection("users"),
+      // }),
     },
   }),
 });
