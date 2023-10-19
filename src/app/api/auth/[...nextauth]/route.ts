@@ -12,8 +12,31 @@ const authOptions = {
     }),
   ],
   callbacks: {
-    async createUser({ user }: { user: User }) {
+    // async createUser({ user }: { user: User }) {
+    //   const { name, email, image, id } = user;
+    //   const db = client.db(process.env.MONGO_DB);
+    //   const usersCollection = db.collection("users");
+    //   const userData = {
+    //     name, // 필수
+    //     email, //선택
+    //     image, // 선택
+    //     id,
+    //   };
+
+    //   // Check if user already exists in the database
+    //   const existingUser = await usersCollection.findOne({ id });
+    //   if (existingUser) {
+    //     return existingUser;
+    //   }
+
+    //   const result = await usersCollection.insertOne(userData);
+    //   console.log(result);
+    //   return userData;
+    // },
+
+    async signIn({ user }: { user: User }): Promise<string | boolean> {
       const { name, email, image, id } = user;
+
       const db = client.db(process.env.MONGO_DB);
       const usersCollection = db.collection("users");
       const userData = {
@@ -25,19 +48,22 @@ const authOptions = {
 
       // Check if user already exists in the database
       const existingUser = await usersCollection.findOne({ id });
-      if (existingUser) {
-        return existingUser;
+      if (!existingUser) {
+        const result = await usersCollection.insertOne(userData);
+        console.log(result);
       }
 
-      const result = await usersCollection.insertOne(userData);
-      console.log(result);
-      return userData;
-    },
-
-    async signIn({ user }: { user: User }): Promise<string | boolean> {
       return true;
     },
   },
+  // events: {
+  //   async createUser(message: object) {
+  //     console.log("createUser", message);
+  //   },
+  //   async updateUser(message: object) {
+  //     console.log("message", message);
+  //   },
+  // },
 };
 
 const handler = NextAuth(authOptions);
