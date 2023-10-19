@@ -20,6 +20,7 @@ const authOptions = {
         name, // 필수
         email, //선택
         image, // 선택
+        id,
       };
 
       // Check if user already exists in the database

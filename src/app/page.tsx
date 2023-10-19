@@ -31,8 +31,14 @@ const Home = () => {
         <h3>강의 불러오는 중</h3>
       ) : (
         <div>
-          <h1>{data?.course?.id}</h1>
-          <h1>{data?.course?.name}</h1>
+          {error ? (
+            <h1>강의 불러오는 중 에러 발생</h1>
+          ) : (
+            <>
+              <h1>{data?.course?.id}</h1>
+              <h1>{data?.course?.name}</h1>
+            </>
+          )}
         </div>
       )}
     </div>
