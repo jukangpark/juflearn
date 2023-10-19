@@ -2,6 +2,7 @@
 
 import { signOut } from "next-auth/react";
 import Link from "next/link";
+import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 
 interface ProfileProps {
@@ -35,9 +36,15 @@ const Profile = ({ user }: ProfileProps) => {
   return (
     <div className="relative">
       <div className="flex items-center">
-        <div className="w-10 h-10 rounded-full overflow-hidden">
+        <div className="w-10 h-10 rounded-full overflow-hidden relative">
           <button onClick={handleDropDown}>
-            <img src={user.image} alt="user_profile" />
+            <Image
+              src={user.image}
+              alt="user_profile"
+              // width={40} layout 을 "fill" 을 주게 되면, relative 포지션을 가진 조상의 너비, 높이와 동일하게 조정한다.
+              // height={40}
+              layout="fill"
+            />
           </button>
         </div>
         {isMenuOpen && (
@@ -53,7 +60,9 @@ const Profile = ({ user }: ProfileProps) => {
                 <Link href="/dashboard#courses">My Courses</Link>
               </li>
               <li>
-                <button onClick={() => signOut()}>Sign out</button>
+                <button onClick={() => signOut({ callbackUrl: "/" })}>
+                  Sign out
+                </button>
               </li>
             </ul>
           </div>

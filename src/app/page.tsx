@@ -9,8 +9,6 @@ const Home = () => {
     variables: { id: courseId },
   });
 
-  console.log("data", data);
-
   if (error) {
     return <h1>에러 발생</h1>;
   }
