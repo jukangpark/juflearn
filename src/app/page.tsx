@@ -9,10 +9,6 @@ const Home = () => {
     variables: { id: courseId },
   });
 
-  if (error) {
-    return <h1>에러 발생</h1>;
-  }
-
   return (
     <div>
       <div className="relative h-[500px] bg-banner-background-color">
