@@ -7,7 +7,7 @@ import Course from "../server/data/Course";
 
 const MONGO_URI = process.env.MONGO_URI as string;
 
-const client = new MongoClient(MONGO_URI);
+export const client = new MongoClient(MONGO_URI);
 
 async function start() {
   try {
@@ -65,7 +65,9 @@ const nextHandler = startServerAndCreateNextHandler(apolloServer, {
   context: async () => ({
     dataSources: {
       courses: new Course({
-        modelOrCollection: client.db("test").collection("courses"),
+        modelOrCollection: client
+          .db(process.env.MONGO_DB)
+          .collection("courses"),
       }),
       // users: new User({
       //   modelOrCollection: client.db("test").collection("users"),
