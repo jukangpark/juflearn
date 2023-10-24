@@ -57,7 +57,7 @@ const Profile = ({ user }: ProfileProps) => {
                 <Link href="/dashboard">Dashboard</Link>
               </li>
               <li>
-                <Link href="/dashboard#courses">My Courses</Link>
+                <Link href="/dashboard/myCourses">My Courses</Link>
               </li>
               <li>
                 <button onClick={() => signOut({ callbackUrl: "/" })}>

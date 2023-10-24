@@ -1,14 +1,16 @@
 "use client";
 
 import { useQuery } from "@apollo/client";
-import { getCourse } from "@/graphql/queries/getCourse";
+import { getAllCourses } from "@/graphql/queries/getAllCourses";
+
+interface Course {
+  id: string;
+  name: string;
+}
 
 const Home = () => {
-  const courseId = "65237bccae11a112903841a7";
-  const { loading, error, data } = useQuery(getCourse, {
-    variables: { id: courseId },
-  });
-
+  const { loading, error, data } = useQuery(getAllCourses);
+  const courses = data?.courses;
   return (
     <div>
       <div className="relative h-[500px] bg-banner-background-color">
@@ -23,20 +25,31 @@ const Home = () => {
           </div>
         </div>
       </div>
-      {loading ? (
-        <h3>강의 불러오는 중</h3>
-      ) : (
-        <div>
-          {error ? (
-            <h1>강의 불러오는 중 에러 발생</h1>
-          ) : (
-            <>
-              <h1>{data?.course?.id}</h1>
-              <h1>{data?.course?.name}</h1>
-            </>
-          )}
-        </div>
-      )}
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+        {loading ? (
+          <h3>강의 불러오는 중</h3>
+        ) : (
+          <>
+            {error ? (
+              <h1>강의 불러오는 중 에러 발생</h1>
+            ) : (
+              <>
+                {courses.map((course: Course) => {
+                  return (
+                    <div
+                      key={course.id}
+                      className="bg-white p-6 rounded-xl shadow-md"
+                    >
+                      <h1 className="text-lg font-bold">{course.name}</h1>
+                      <div className="aspect-w-16 aspect-h-9 ">강의소개</div>
+                    </div>
+                  );
+                })}
+              </>
+            )}
+          </>
+        )}
+      </div>
     </div>
   );
 };
