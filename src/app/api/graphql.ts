@@ -23,13 +23,13 @@ start();
 const resolvers = {
   Query: {
     hello: () => "world",
-    course: async (
-      _source: any,
-      { id }: { id: string },
-      { dataSources }: any
-    ): Promise<Course | null> => {
-      return dataSources.courses.getCourse(id);
-    },
+    // course: async (
+    //   _source: any,
+    //   { id }: { id: string },
+    //   { dataSources }: any
+    // ): Promise<Course | null> => {
+    //   return dataSources.courses.getCourse(id);
+    // },
     // user: async (
     //   _source: any,
     //   { id }: { id: string },
@@ -37,17 +37,25 @@ const resolvers = {
     // ): Promise<User | null> => {
     //   return dataSources.users.getUser(id);
     // },
+    courses: async (
+      _source: any,
+      _args: any,
+      { dataSources }: any
+    ): Promise<Course[]> => {
+      return dataSources.courses.getAllCourses();
+    },
   },
 };
 
 const typeDefs = gql`
   type Query {
     hello: String
-    course(id: ID!): Course
+    # course(id): Course
+    courses: [Course]
   }
   type Course {
-    id: ID!
-    name: String!
+    id: ID
+    name: String
   }
   # type User {
   #   name: String

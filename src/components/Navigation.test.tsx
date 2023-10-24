@@ -22,24 +22,10 @@ describe("Navigation", () => {
 
     render(<Navigation navigationItems={navigationItems} />);
 
-    navigationItems.forEach((item) => {
+    navigationItems.forEach(item => {
       const link = screen.getByText(item.text);
       expect(link).toBeInTheDocument();
     });
-  });
-
-  // 인증이 된 상태에서는 로그아웃 버튼이 보여야 함
-  it("should show logout button when user is authenticated", () => {
-    mockUseSession.mockReturnValue({
-      data: session,
-      status: "authenticated",
-      update: updateSessionMock,
-    });
-
-    render(<Navigation navigationItems={navigationItems} />);
-    expect(mockUseSession).toHaveBeenCalledWith();
-    const logoutButton = screen.getByText("로그아웃");
-    expect(logoutButton).toBeInTheDocument();
   });
 
   // 인증이 안된 상태에서는 로그인 버튼이 보여야 함

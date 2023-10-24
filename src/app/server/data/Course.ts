@@ -11,4 +11,9 @@ export default class Course extends MongoDataSource<CourseInterface> {
     const course = await this.findOneById(courseId);
     return course ?? null;
   }
+
+  async getAllCourses(): Promise<CourseInterface[]> {
+    const courses = await this.collection.find().toArray();
+    return courses;
+  }
 }
